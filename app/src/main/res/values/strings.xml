@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">MyCalculator</string>
+    <string name="calc_text">0</string>
+    <string name="num_one">1</string>
+    <string name="num_two">2</string>
+    <string name="num_three">3</string>
+    <string name="num_four">4</string>
+    <string name="num_five">5</string>
+    <string name="num_six">6</string>
+    <string name="num_seven">7</string>
+    <string name="num_eight">8</string>
+    <string name="num_nine">9</string>
+    <string name="btn_divide">/</string>
+    <string name="btn_multiply">*</string>
+    <string name="btnMinus">-</string>
+    <string name="num_zero">0</string>
+    <string name="btnPlus">+</string>
+    <string name="btnClear">AC</string>
+    <string name="divedeBy100">%</string>
+
+    <string name="btnEqual">=</string>
+    <string name="btnDecimal">.</string>
+
+</resources>

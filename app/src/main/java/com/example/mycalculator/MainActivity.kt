@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
         else{
 
             firstText?.drop(firstText.lastIndex)
-            enterdDigit=java.lang.StringBuilder().append(firstText).append(view.text).toString()
+            enterdDigit=StringBuilder().append(firstText).append(view.text).toString()
             lastOperand=true
 
         }
@@ -221,9 +221,11 @@ class MainActivity : AppCompatActivity() {
 
     fun onDelete(view: View)
     {
-        var text = tvResult?.text
+        var text = tvResult?.text.toString()
 
-        text=text?.dropLast(text?.length?.minus(1) ?:0)
+        if (text != null) {
+            text=text.dropLast(1)
+        }
 
         tvResult?.text=text
     }

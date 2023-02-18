@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bgGray"
+    android:background="@color/black"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/tvResult"
         android:layout_width="match_parent"
-        android:layout_height="221dp"
+        android:layout_height="237dp"
         android:backgroundTint="#989393"
         android:gravity="end|bottom"
         android:padding="10dp"

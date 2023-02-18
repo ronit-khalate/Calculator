@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
         tvResult= findViewById(R.id.tvResult)
     }
 
@@ -224,6 +225,15 @@ class MainActivity : AppCompatActivity() {
         var text = tvResult?.text.toString()
 
         if (text != null) {
+            text=text.dropLast(1)
+        }
+        if(text.isEmpty())
+        {
+            text="0"
+            startOverFlag=true
+        }
+        if (text[text.lastIndex]=='.')
+        {
             text=text.dropLast(1)
         }
 

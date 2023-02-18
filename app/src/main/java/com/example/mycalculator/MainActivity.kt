@@ -15,6 +15,8 @@ class MainActivity : AppCompatActivity() {
 
     //- this flag is used for removing default zero from result textview
     //- and appending clicked value
+
+    var enterdDigit:String=""
     var startOverFlag=true
 
     var lastNumeric :Boolean=true
@@ -41,6 +43,12 @@ class MainActivity : AppCompatActivity() {
         //? view parameter is out button clicked
         lastNumeric=true
         lastDot=false
+
+
+        val firstText = enterdDigit
+        val secondText = view .text
+
+        enterdDigit = StringBuilder().append(firstText).append(secondText).toString()
         tvResult?.append((view as Button).text)
 
     }
@@ -69,16 +77,21 @@ class MainActivity : AppCompatActivity() {
     fun onOperator(view: View)
     {
 
+        val firstText = tvResult?.text
+        val secondText = (view as Button).text
 
         changeOperandBtnColor((view as Button))
         tvResult?.text?.let {
 
             if (lastNumeric && !isOperatorAdded(it.toString()))
             {
-                tvResult?.append((view as Button).text)
+
+                enterdDigit=StringBuilder().append(firstText).append(secondText).toString()
+//                tvResult?.append((view as Button).text)
 
                 lastNumeric = false
                 lastDot=false
+                startOverFlag=true
             }
         }
 
@@ -108,7 +121,7 @@ class MainActivity : AppCompatActivity() {
         var two :Double?
         if(lastNumeric)
         {
-            var tvValue = tvResult?.text.toString()
+            var tvValue = enterdDigit
 
             try {
 
@@ -174,6 +187,8 @@ class MainActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
+
+        enterdDigit=""
     }
 
     fun onDivideBy100(view: View)

@@ -11,4 +11,5 @@
     <color name="bgGray">#1C1C1C</color>
     <color name="btnOrange">#FF9500</color>
     <color name="grey">#505050</color>
+    <color name="btnDarkGrey">#D4D4D2</color>
 </resources>

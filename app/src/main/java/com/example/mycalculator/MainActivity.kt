@@ -1,5 +1,6 @@
 package com.example.mycalculator
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import kotlin.concurrent.timerTask
+import kotlin.math.min
 import kotlin.ArithmeticException as ArithmeticException
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     fun onDigit(view : View)
     {
 
+        changeOperandBtnColor((view as Button))
         if(startOverFlag)
         {
             tvResult?.text=""
@@ -45,6 +48,7 @@ class MainActivity : AppCompatActivity() {
 
     fun onClear(view :View)
     {
+        changeOperandBtnColor((view as Button))
         startOverFlag=true
         lastDot=false
         lastNumeric=true
@@ -65,6 +69,8 @@ class MainActivity : AppCompatActivity() {
     fun onOperator(view: View)
     {
 
+
+        changeOperandBtnColor((view as Button))
         tvResult?.text?.let {
 
             if (lastNumeric && !isOperatorAdded(it.toString()))
@@ -177,6 +183,74 @@ class MainActivity : AppCompatActivity() {
         tvResult?.text =(enteredValue/100).toString()
         startOverFlag= true
         lastDot=false
+    }
+
+    fun onDelete(view: View)
+    {
+        var text = tvResult?.text
+
+        text=text?.dropLast(text?.length?.minus(1) ?:0)
+
+        tvResult?.text=text
+    }
+
+    fun changeOperandBtnColor(btn :Button)
+    {
+
+
+
+        val divideBtn = findViewById<Button>(R.id.btnDivide)
+        val plusBtn = findViewById<Button>(R.id.btnPlus)
+        val minusBtn = findViewById<Button>(R.id.btnSubstract)
+        val multiplyBtn = findViewById<Button>(R.id.btnMultiply)
+
+        if(btn!= divideBtn){
+
+            divideBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.btnOrange))
+            divideBtn.setTextColor(resources.getColor(R.color.white))
+        }
+        else{
+
+            divideBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.white))
+            divideBtn.setTextColor(resources.getColor(R.color.btnOrange))
+        }
+
+        if(btn!=plusBtn){
+
+            plusBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.btnOrange))
+            plusBtn.setTextColor(resources.getColor(R.color.white))
+
+        }
+        else{
+
+            plusBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.white))
+            plusBtn.setTextColor(resources.getColor(R.color.btnOrange))
+        }
+
+        if(btn != multiplyBtn){
+
+            multiplyBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.btnOrange))
+            multiplyBtn.setTextColor(resources.getColor(R.color.white))
+
+        }
+        else{
+
+            multiplyBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.white))
+            multiplyBtn.setTextColor(resources.getColor(R.color.btnOrange))
+        }
+
+        if(btn != minusBtn){
+
+            minusBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.btnOrange))
+            minusBtn.setTextColor(resources.getColor(R.color.white))
+
+        }
+        else{
+
+            minusBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.white))
+            minusBtn.setTextColor(resources.getColor(R.color.btnOrange))
+        }
+
     }
 
 

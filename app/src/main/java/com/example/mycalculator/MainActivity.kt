@@ -17,10 +17,12 @@ class MainActivity : AppCompatActivity() {
     //- and appending clicked value
 
     var enterdDigit:String=""
-    var startOverFlag=true
 
+    // Flags
+    var startOverFlag=true
     var lastNumeric :Boolean=true
     var lastDot :Boolean = false
+    var lastOperand :Boolean=false
 
     private var tvResult :TextView?=null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         //? view parameter is out button clicked
         lastNumeric=true
         lastDot=false
+        lastOperand=false
 
 
         val firstText = enterdDigit
@@ -60,15 +63,17 @@ class MainActivity : AppCompatActivity() {
         startOverFlag=true
         lastDot=false
         lastNumeric=true
+        lastOperand=false
         tvResult?.text="0"
     }
 
     fun onDecimalPoint(view: View)
     {
-            if(lastNumeric && ! lastDot)
+            if(lastNumeric && ! lastDot && !lastOperand)
             {
                 tvResult?.append(".")
                 lastNumeric=false
+                lastOperand=false
                 lastDot=true
             }
     }
@@ -79,21 +84,34 @@ class MainActivity : AppCompatActivity() {
 
         val firstText = tvResult?.text
         val secondText = (view as Button).text
-
         changeOperandBtnColor((view as Button))
-        tvResult?.text?.let {
 
-            if (lastNumeric && !isOperatorAdded(it.toString()))
-            {
+        if (!lastOperand)
+        {
 
-                enterdDigit=StringBuilder().append(firstText).append(secondText).toString()
+            tvResult?.text?.let {
+
+                if (lastNumeric && !isOperatorAdded(it.toString()))
+                {
+
+                    enterdDigit=StringBuilder().append(firstText).append(secondText).toString()
 //                tvResult?.append((view as Button).text)
 
-                lastNumeric = false
-                lastDot=false
-                startOverFlag=true
+                    lastNumeric = false
+                    lastDot=false
+                    startOverFlag=true
+                    lastOperand=true
+                }
             }
         }
+        else{
+
+            firstText?.drop(firstText.lastIndex)
+            enterdDigit=java.lang.StringBuilder().append(firstText).append(view.text).toString()
+            lastOperand=true
+
+        }
+
 
     }
 
@@ -119,6 +137,7 @@ class MainActivity : AppCompatActivity() {
         var splitValue :List<String>
         var one :Double?
         var two :Double?
+
         if(lastNumeric)
         {
             var tvValue = enterdDigit

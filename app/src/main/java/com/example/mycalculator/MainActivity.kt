@@ -1,14 +1,14 @@
 package com.example.mycalculator
 
 import android.content.res.ColorStateList
-import android.graphics.Color
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import kotlin.concurrent.timerTask
-import kotlin.math.min
+import androidx.core.content.ContextCompat
+
 import kotlin.ArithmeticException as ArithmeticException
 
 class MainActivity : AppCompatActivity() {
@@ -16,13 +16,14 @@ class MainActivity : AppCompatActivity() {
     //- this flag is used for removing default zero from result textview
     //- and appending clicked value
 
-    var enterdDigit:String=""
+    private var enterdDigit:String=""
 
     // Flags
-    var startOverFlag=true
-    var lastNumeric :Boolean=true
-    var lastDot :Boolean = false
-    var lastOperand :Boolean=false
+    private var startOverFlag=true
+    private var lastNumeric :Boolean=true
+    private var lastDot :Boolean = false
+    private var lastOperand :Boolean=false
+    private var startsWithMinus: Boolean =false
 
     private var tvResult :TextView?=null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         val secondText = view .text
 
         enterdDigit = StringBuilder().append(firstText).append(secondText).toString()
-        tvResult?.append((view as Button).text)
+        tvResult?.append(view.text)
 
     }
 
@@ -68,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         tvResult?.text="0"
     }
 
-    fun onDecimalPoint(view: View)
+    fun onDecimalPoint()
     {
             if(lastNumeric && ! lastDot && !lastOperand)
             {
@@ -85,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
         val firstText = tvResult?.text
         val secondText = (view as Button).text
-        changeOperandBtnColor((view as Button))
+        changeOperandBtnColor(view)
 
         if (!lastOperand)
         {
@@ -135,13 +136,27 @@ class MainActivity : AppCompatActivity() {
 
     fun onEqual(view: View)
     {
-        var splitValue :List<String>
-        var one :Double?
-        var two :Double?
+        val splitValue :List<String>
+        val one :Double?
+        val two :Double?
 
         if(lastNumeric)
         {
             var tvValue = enterdDigit
+
+            if (tvValue.startsWith("-"))
+            {
+
+                startsWithMinus=true
+                tvValue=tvValue.drop(1).trim()
+
+
+            }
+            else{
+                startsWithMinus=false
+            }
+
+
 
             try {
 
@@ -179,9 +194,20 @@ class MainActivity : AppCompatActivity() {
                 }
                 else if (tvValue.contains("-"))
                 {
-                    splitValue = tvValue.split("-")
-                    one= splitValue[0].toDouble()
-                    two = splitValue[1] .toDouble()
+                        if(!startsWithMinus)
+                        {
+                            splitValue = tvValue.split("-")
+                            one= splitValue[0].toDouble()
+                            two = splitValue[1] .toDouble()
+                        }
+                        else{
+
+                            splitValue = tvValue.split("-")
+                            one= StringBuilder().append("-").append(splitValue[0]).toString().toDouble()
+                            two = splitValue[1] .toDouble()
+                        }
+
+
 
                     tvResult?.text=(one - two).toString()
                 }
@@ -195,10 +221,18 @@ class MainActivity : AppCompatActivity() {
                 }
                 else {
 
-                    splitValue = tvValue.split("+")
-                    one= splitValue[0].toDouble()
-                    two = splitValue[1] .toDouble()
+                    if(!startsWithMinus)
+                    {
+                        splitValue = tvValue.split("+")
+                        one= splitValue[0].toDouble()
+                        two = splitValue[1] .toDouble()
+                    }
+                    else{
 
+                        splitValue = tvValue.split("+")
+                        one= StringBuilder().append("-").append(splitValue[0]).toString().toDouble()
+                        two = splitValue[1] .toDouble()
+                    }
                     tvResult?.text=(one + two).toString()
 
                 }
@@ -224,9 +258,7 @@ class MainActivity : AppCompatActivity() {
     {
         var text = tvResult?.text.toString()
 
-        if (text != null) {
-            text=text.dropLast(1)
-        }
+        text=text.dropLast(1)
         if(text.isEmpty())
         {
             text="0"
@@ -240,7 +272,7 @@ class MainActivity : AppCompatActivity() {
         tvResult?.text=text
     }
 
-    fun changeOperandBtnColor(btn :Button)
+    private fun changeOperandBtnColor(btn :Button)
     {
 
 
@@ -250,51 +282,54 @@ class MainActivity : AppCompatActivity() {
         val minusBtn = findViewById<Button>(R.id.btnSubstract)
         val multiplyBtn = findViewById<Button>(R.id.btnMultiply)
 
+        //? use ContextCompat.getColor() instead of resource.getColor()
+        //! resource.getColor() is deprecated
+
         if(btn!= divideBtn){
 
-            divideBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.btnOrange))
-            divideBtn.setTextColor(resources.getColor(R.color.white))
+            divideBtn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this,R.color.btnOrange))
+            divideBtn.setTextColor(ContextCompat.getColor(this,R.color.white))
         }
         else{
 
-            divideBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.white))
-            divideBtn.setTextColor(resources.getColor(R.color.btnOrange))
+            divideBtn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this,R.color.white))
+            divideBtn.setTextColor(ContextCompat.getColor(this,R.color.btnOrange))
         }
 
         if(btn!=plusBtn){
 
-            plusBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.btnOrange))
-            plusBtn.setTextColor(resources.getColor(R.color.white))
+            plusBtn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this,R.color.btnOrange))
+            plusBtn.setTextColor(ContextCompat.getColor(this,R.color.white))
 
         }
         else{
 
-            plusBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.white))
-            plusBtn.setTextColor(resources.getColor(R.color.btnOrange))
+            plusBtn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this,R.color.white))
+            plusBtn.setTextColor(ContextCompat.getColor(this,R.color.btnOrange))
         }
 
         if(btn != multiplyBtn){
 
-            multiplyBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.btnOrange))
-            multiplyBtn.setTextColor(resources.getColor(R.color.white))
+            multiplyBtn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this,R.color.btnOrange))
+            multiplyBtn.setTextColor(ContextCompat.getColor(this,R.color.white))
 
         }
         else{
 
-            multiplyBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.white))
-            multiplyBtn.setTextColor(resources.getColor(R.color.btnOrange))
+            multiplyBtn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this,R.color.white))
+            multiplyBtn.setTextColor(ContextCompat.getColor(this,R.color.btnOrange))
         }
 
         if(btn != minusBtn){
 
-            minusBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.btnOrange))
-            minusBtn.setTextColor(resources.getColor(R.color.white))
+            minusBtn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this,R.color.btnOrange))
+            minusBtn.setTextColor(ContextCompat.getColor(this,R.color.white))
 
         }
         else{
 
-            minusBtn.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.white))
-            minusBtn.setTextColor(resources.getColor(R.color.btnOrange))
+            minusBtn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this,R.color.white))
+            minusBtn.setTextColor(ContextCompat.getColor(this,R.color.btnOrange))
         }
 
     }

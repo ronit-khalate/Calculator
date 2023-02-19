@@ -13,9 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="237dp"
         android:backgroundTint="#989393"
+        android:fontFamily="@font/myriadproregular"
         android:gravity="end|bottom"
         android:padding="10dp"
         android:text="@string/calc_text"
+        android:textStyle="bold"
         android:textColor="@color/white"
         android:textSize="48sp" />
 
@@ -50,6 +52,8 @@
                 android:text="@string/btnClear"
                 android:textColor="@color/black"
                 android:textSize="20sp"
+                android:fontFamily="@font/myriadproregular"
+                android:textStyle="bold"
 
                 />
 
@@ -66,6 +70,8 @@
                 android:text="C"
                 android:textColor="@color/black"
                 android:textSize="20sp"
+                android:fontFamily="@font/myriadproregular"
+                android:textStyle="bold"
 
                 />
 
@@ -80,7 +86,9 @@
                 android:backgroundTint="@color/btnDarkGrey"
                 android:onClick="onDivideBy100"
                 android:text="@string/divedeBy100"
+                android:textStyle="bold"
                 android:textColor="@color/black"
+                android:fontFamily="@font/myriadproregular"
                 android:textSize="20sp" />
 
             <Button
@@ -95,6 +103,8 @@
                 android:backgroundTint="@color/btnOrange"
                 android:onClick="onOperator"
                 android:text="@string/btn_divide"
+                android:textStyle="bold"
+                android:fontFamily="@font/myriadproregular"
                 android:textSize="20sp" />
 
 
@@ -119,6 +129,8 @@
                 android:background="@drawable/rounded"
                 android:onClick="onDigit"
                 android:text="@string/num_seven"
+                android:textStyle="bold"
+                android:fontFamily="@font/myriadproregular"
                 android:textSize="20sp"
 
                 />
@@ -132,6 +144,8 @@
                 android:background="@drawable/rounded"
                 android:onClick="onDigit"
                 android:text="@string/num_eight"
+                android:textStyle="bold"
+                android:fontFamily="@font/myriadproregular"
                 android:textSize="20sp"
 
                 />
@@ -145,6 +159,8 @@
                 android:background="@drawable/rounded"
                 android:onClick="onDigit"
                 android:text="@string/num_nine"
+                android:textStyle="bold"
+                android:fontFamily="@font/myriadproregular"
                 android:textSize="20sp" />
 
             <Button
@@ -158,6 +174,8 @@
                 android:backgroundTint="@color/btnOrange"
                 android:onClick="onOperator"
                 android:text="@string/btn_multiply"
+                android:textStyle="bold"
+                android:fontFamily="@font/myriadproregular"
                 android:textSize="20sp" />
 
 
@@ -182,6 +200,8 @@
                 android:background="@drawable/rounded"
                 android:onClick="onDigit"
                 android:text="@string/num_four"
+                android:textStyle="bold"
+                android:fontFamily="@font/myriadproregular"
                 android:textSize="20sp"
 
                 />
@@ -195,6 +215,8 @@
                 android:background="@drawable/rounded"
                 android:onClick="onDigit"
                 android:text="@string/num_five"
+                android:textStyle="bold"
+                android:fontFamily="@font/myriadproregular"
                 android:textSize="20sp"
 
                 />
@@ -208,6 +230,8 @@
                 android:background="@drawable/rounded"
                 android:onClick="onDigit"
                 android:text="@string/num_six"
+                android:textStyle="bold"
+                android:fontFamily="@font/myriadproregular"
                 android:textSize="20sp" />
 
             <Button
@@ -221,6 +245,8 @@
                 android:backgroundTint="@color/btnOrange"
                 android:onClick="onOperator"
                 android:text="@string/btnMinus"
+                android:textStyle="bold"
+                android:fontFamily="@font/myriadproregular"
                 android:textSize="20sp" />
 
 
@@ -233,6 +259,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
+            android:fontFamily="@font/myriadproregular"
             android:orientation="horizontal">
 
 
@@ -245,6 +272,8 @@
                 android:background="@drawable/rounded"
                 android:onClick="onDigit"
                 android:text="@string/num_one"
+                android:textStyle="bold"
+                android:fontFamily="@font/myriadproregular"
                 android:textSize="20sp"
 
                 />
@@ -258,6 +287,8 @@
                 android:background="@drawable/rounded"
                 android:onClick="onDigit"
                 android:text="@string/num_two"
+                android:textStyle="bold"
+                android:fontFamily="@font/myriadproregular"
                 android:textSize="20sp"
 
                 />
@@ -272,7 +303,9 @@
                 android:background="@drawable/rounded"
                 android:onClick="onDigit"
                 android:text="@string/num_three"
+                android:fontFamily="@font/myriadproregular"
                 android:textSize="20sp"
+                android:textStyle="bold"
 
                 />
 
@@ -286,8 +319,9 @@
                 android:background="@drawable/rounded"
                 android:backgroundTint="@color/btnOrange"
                 android:onClick="onOperator"
+                android:fontFamily="@font/myriadproregular"
                 android:text="@string/btnPlus"
-
+                android:textStyle="bold"
                 android:textSize="20sp" />
 
 
@@ -300,6 +334,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
+            android:textStyle="bold"
             android:orientation="horizontal">
 
 
@@ -315,6 +350,8 @@
                 android:paddingLeft="40dp"
                 android:text="@string/num_zero"
                 android:textAlignment="textStart"
+                android:fontFamily="@font/myriadproregular"
+                android:textStyle="bold"
                 android:textSize="20sp"
 
                 />
@@ -329,6 +366,8 @@
                 android:background="@drawable/rounded"
                 android:onClick="onDecimalPoint"
                 android:text="@string/btnDecimal"
+                android:fontFamily="@font/myriadproregular"
+                android:textStyle="bold"
                 android:textSize="20sp"
 
                 />
@@ -344,6 +383,8 @@
                 android:background="@drawable/rounded"
                 android:backgroundTint="@color/btnOrange"
                 android:onClick="onEqual"
+                android:fontFamily="@font/myriadproregular"
+                android:textStyle="bold"
                 android:text="@string/btnEqual"
 
                 />

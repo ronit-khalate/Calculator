@@ -69,11 +69,15 @@ class MainActivity : AppCompatActivity() {
         tvResult?.text="0"
     }
 
-    fun onDecimalPoint()
+    fun onDecimalPoint(view: View)
     {
             if(lastNumeric && ! lastDot && !lastOperand)
             {
                 tvResult?.append(".")
+                val firstText = enterdDigit
+                val secondText ="."
+
+                enterdDigit = StringBuilder().append(firstText).append(secondText).toString()
                 lastNumeric=false
                 lastOperand=false
                 lastDot=true
@@ -111,6 +115,8 @@ class MainActivity : AppCompatActivity() {
             firstText?.drop(firstText.lastIndex)
             enterdDigit=StringBuilder().append(firstText).append(view.text).toString()
             lastOperand=true
+            lastDot=false
+            lastNumeric=false
 
         }
 
@@ -171,7 +177,18 @@ class MainActivity : AppCompatActivity() {
                         startOverFlag=true
                     }
 
-                    tvResult?.text=(one / two).toString()
+                    var result =(one / two).toString().drop(1).trim()
+                    if(result[result.lastIndex]=='.')
+                    {
+                        tvResult?.text=(one / two).toInt().toString()
+                    }
+                    else
+                    {
+                        tvResult?.text=(one / two).toString()
+                    }
+
+
+
 
 
                 }
@@ -189,7 +206,16 @@ class MainActivity : AppCompatActivity() {
 
 
 
-                    tvResult?.text=(one * two).toString()
+                    var result =(one * two).toString().drop(1).trim()
+                    if(result[result.lastIndex]=='.')
+                    {
+                        tvResult?.text=(one * two).toInt().toString()
+                    }
+                    else
+                    {
+                        tvResult?.text=(one * two).toString()
+                    }
+
 
                 }
                 else if (tvValue.contains("-"))
@@ -207,9 +233,16 @@ class MainActivity : AppCompatActivity() {
                             two = splitValue[1] .toDouble()
                         }
 
+                    var result =(one - two).toString().drop(1)
+                    if(result[result.lastIndex]=='.')
+                    {
+                        tvResult?.text=(one - two).toInt().toString()
+                    }
+                    else
+                    {
+                        tvResult?.text=(one - two).toString()
+                    }
 
-
-                    tvResult?.text=(one - two).toString()
                 }
                 else if (tvValue.contains("%"))
                 {
@@ -233,7 +266,17 @@ class MainActivity : AppCompatActivity() {
                         one= StringBuilder().append("-").append(splitValue[0]).toString().toDouble()
                         two = splitValue[1] .toDouble()
                     }
-                    tvResult?.text=(one + two).toString()
+
+                    var result =(one + two).toString().drop(1).trim()
+                    if(result[result.lastIndex]=='.')
+                    {
+                        tvResult?.text=(one + two).toInt().toString()
+                    }
+                    else
+                    {
+                        tvResult?.text=(one + two).toString()
+                    }
+
 
                 }
             }catch (e : ArithmeticException)
